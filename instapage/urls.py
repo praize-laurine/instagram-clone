@@ -4,8 +4,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns=[
-    url('',views.index,name = 'index'),
+  
     url('accounts/register/', views.register, name='register'),
+      url('',views.index,name = 'index'),
 
 ]
 if settings.DEBUG:
