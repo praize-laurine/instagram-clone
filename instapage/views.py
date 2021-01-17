@@ -23,28 +23,23 @@ def register(request):
         return render(request, 'registration/register.html', {'form': form})    
 
 @login_required(login_url='/accounts/login/')
-def index(request):
-    images = Post.objects.all()
-    # users = User.objects.exclude(id=request.user.id)
-    json_posts = []
-    for post in images:
+def home(request):
+    all_posts = Image.all_images()
+    if request.method == 'POST':
+        update_form = UserUpdateForm(request.POST, instance = request.user)
+        profile_form = ProfileUpdateForm(request.POST,request.FILES, instance= request.user.profile)
+        if update_form.is_valid() and profile_form.is_valid():
+            update_form.save()
+            profile_form.save()
+            return redirect('profile')
+    else:
+        update_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=request.user.profile)
 
-       
-        picture = Profile.objects.filter(user=post.user.id).first()
-        if picture:
-            picture = picture.profile_pic.url
-        else:
-            picture =''
-        obj = dict(
-            image=post.image.url,
-            author=post.user.username,
-            avatar=pic,
-            name=post.title,
-            caption=post.caption
-           
-
-        )
-        json_posts.append(obj)
-    return render(request, 'index.html', {"images": json_posts})
-
+    context = {
+        'update_form': update_form,
+        'profile_form': profile_form,
+        'all_posts': all_posts
+    }
+    return render(request, 'index.html', context)
 
