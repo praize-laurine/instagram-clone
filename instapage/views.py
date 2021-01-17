@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 from .forms import RegistrationForm
-from django.contrib.auth import authenticate, login,
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from .models import Post
 
 
 # Create your views here.
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request,POST)
-        if form.is.valid():
+        if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get(password1)
@@ -28,7 +29,7 @@ def index(request):
     json_posts = []
     for post in images:
 
-        # import pdb; pdb.set_trace()
+       
         picture = Profile.objects.filter(user=post.user.id).first()
         if picture:
             picture = picture.profile_pic.url

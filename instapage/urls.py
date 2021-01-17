@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns=[
     url('',views.index,name = 'index'),
-    path('accounts/register/', views.register, name='register'),
+    url('accounts/register/', views.register, name='register'),
 
 ]
 if settings.DEBUG:
