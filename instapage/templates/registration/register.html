@@ -1,46 +1,37 @@
-{%extends "registration/base.html"%}
-{% load bootstrap3 %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-<br><br>
-<div class="container">
-  <div class="row">
-   
-    <div class="col-md-5" style="padding-top: 50px;">
-      <img src="/static/images/ig3.png" alt="instagram">
-    </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-5">
-      {% if form.errors %}
-      <p> Some Information Might be Incorrect </p>
-      {% endif %}
-      <div class="card container">
-
-        <div class="panel-heading">
-          <h3 class="text-center" style="font-family: 'Lobster Two', cursive;">Instagram</h3>
-        </div>
-      
-        <div class="panel-body">
-
-          <form action="/accounts/register/" method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+{% load static %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-title mt-4">
+                    <img src="{% static 'images/ig3.png' %}" alt="" width="40%" class="D-block mx-auto">
+                </div>
+                <div class="card-body mb-3 mr-3 ml-3">
+                    <p class="text-center">Sign up to see photos and videos from your friends.
+                    </p>
+                    <form action="" method="post" novalidate>
+                        {% csrf_token%}
+                        {{ form|crispy}}
+                        <button type="submit" class="btn btn-primary btn-sm"> Sign up</button>
+                    </form>
+                </div>
+                <p class="mr-4 ml-4 mb-2 text-center">By signing up, you agree to our Terms , Data Policy and Cookies
+                    Policy.</p>
             </div>
-
-            <p>Already have an account? <a href="/accounts/login"> Log In</a></p>
-
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
+            <div class="card mt-2">
+                <div class="card-body mt-3 mb-2 mr-3 ml-3">
+                    <p>Have an account? <a href="{% url 'login' %}">Log in</a></p>
+                </div>
+            </div>
+            
         </div>
-      </div>
+
+        <div class="col-md-4"></div>
     </div>
-    <div class="col-md-1"></div>
-
-
-
-  </div>
 </div>
 
 {% endblock %}

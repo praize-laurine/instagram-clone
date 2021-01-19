@@ -1,15 +1,18 @@
-from django.conf import settings
-from django.conf.urls.static import static
-from django.conf.urls import url
-# from django.urls import url,include
+from django.urls import path, include
+from instapage.views import PostLikeToggle, PostLikeAPIToggle
 from . import views
 
-urlpatterns=[
-    url('instagramHome/home.html', views.home, name='instagramHome-home'),
-    url('Pabout/', views.about, name='instagramHome-about'),
-    url('new_post/', views.add_post, name='add_post'),
-    url("<int:pk>/", views.post_detail, name="post_detail"),
-    url('<int:pk>',views.like, name='likes')
+urlpatterns = [
+    path('register/', views.register, name='register'),
+    path('account/', include('django.contrib.auth.urls')),
+    path('', views.index, name='index'),
+    path('profile/<username>/', views.profile, name='profile'),
+    path('profileUser/<username>/', views.profileUser, name='profileUser'),
+    path('post/<id>', views.post_comment, name='comment'),
+    path('post/<id>/like', PostLikeToggle.as_view(), name='liked'),
+    path('api/post/<id>/like', PostLikeAPIToggle.as_view(), name='liked-api'),
+    path('like', views.like_post, name='like_post'),
+    path('search/', views.search_profile, name='search'),
+    path('unfollow/<to_unfollow>', views.unfollow, name='unfollow'),
+    path('follow/<to_follow>', views.follow, name='follow')
 ]
-if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

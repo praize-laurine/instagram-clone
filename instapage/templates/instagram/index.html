@@ -1,4 +1,4 @@
-{% extends 'instagram/layout.html' %}
+{% extends 'instagram/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -40,10 +40,10 @@
                 <div class="card-title">
                     <img src="{{image.user.profile_picture.url}}" class="rounded-circle border ml-3 mt-2  mr-3"
                          alt="{{image.user.user.username}}" width="35" height="35">
-                    <a href="{% url 'user_profile' image.user.user.username  %}" class="mt-4 user">{{image.user.user.username|title}}</a>
+                    <a href="{% url 'profileUser' image.user.user.username  %}" class="mt-4 user">{{image.user.user.username|title}}</a>
                 </div>
                 <div class="card-body mb-4">
-                    <a href="{% url 'comment' image.id %}"><div class="card-text"style="background-image:url({{ image.image.url }}); background-size: contain;position: sticky">
+                    <a href="{% url 'comment' image.id %}"><div class="card-text"style="background-image:url({{ image.image.url }});;background-size: contain;position: sticky">
                         <img src="{{image.image.url}}"  class="card-img" width="100%"/>
                     </div></a>
                 </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-md-6 mt-4 user-detail">
                     <span class=" text-secondary"><a
-                            href="{% url 'user_profile' user.username %}">{{ user.username }}</a></span> <br>
+                            href="{% url 'profileUser' user.username %}">{{ user.username }}</a></span> <br>
                     <span class=" inname">{{ user.profile.name }}</span>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                                          width="45px" height="45px">
                                 </div>
                                 <div class="col-md-6 mr-2 mt-2">
-                                    <span><a href="{% url 'user_profile' user.username  %}">{{user.username}}</a></span>
+                                    <span><a href="{% url 'profileUser' user.username  %}">{{user.username}}</a></span>
                                 </div>
                                 <div class="col-md-4">
                                 </div>
@@ -111,8 +111,6 @@
 
         </div>
 
-    <!-- </div>
-    <p class="text-center mt-5">All rights reserved. Charles Owiti @ 2019</p>
-</div> -->
+                                                                                         
 
 {% endblock %}
