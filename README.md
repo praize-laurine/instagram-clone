@@ -33,6 +33,14 @@ source virtual/bin/activate
 ## Install dependancies
 Install dependancies that will create an environment for the app to run <code>pip install -r requirements.txt</code>
 
+## Make and run migrations
+<pre><code>
+-python3.7 manage.py check
+-python manage.py makemigrations instag
+-python3.7 manage.py sqlmigrate instag 0001
+-python3.7 manage.py migrate
+</code></pre>
+
 # Contact Details
 If you have any request or questions please email me at preyzelaurine@gmail.com
 
