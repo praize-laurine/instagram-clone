@@ -76,9 +76,9 @@ def profileUser(request, username):
     user_prof = get_object_or_404(User, username=username)
     if request.user == profileUser:
         return redirect('profile', username=request.user.username)
-    user_posts = profileUser.profile.posts.all()
+    user_posts = user_prof.profile.posts.all()
     
-    followers = Follow.objects.filter(followed=profileUser.profile)
+    followers = Follow.objects.filter(followed=user_prof.profile)
     follow_status = None
     for follower in followers:
         if request.user.profile == follower.follower:
@@ -139,7 +139,6 @@ class PostLikeAPIToggle(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, id=None, format=None):
-        # id = self.kwargs.get('id')
         obj = get_object_or_404(Post, pk=id)
         url_ = obj.get_absolute_url()
         user = self.request.user
