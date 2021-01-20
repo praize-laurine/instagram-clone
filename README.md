@@ -30,6 +30,9 @@ source virtual/bin/activate
 - Run this to test the appllication
 `python manage.py test instagram`
 
+## Install dependancies
+Install dependancies that will create an environment for the app to run <code>pip install -r requirements.txt</code>
+
 # Contact Details
 If you have any request or questions please email me at preyzelaurine@gmail.com
 
